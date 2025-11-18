@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pengajuan NUPTK</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- TOP LOADING BAR -->
+    <div id="topLoader"></div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                    <img src="assets/img/vervalptk-logo.png" class="w-10 h-10">
+                    <div>
+                        <span class="font-bold text-xl text-blue-600">Verval</span>
+                        <span class="font-bold text-xl text-green-500">PTK</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <h1 class="text-xl font-semibold text-gray-700">Sistem Pengajuan NUPTK</h1>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 mt-8">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-5">
+                <h2 class="text-2xl font-bold">Formulir Ajuan Calon NUPTK</h2>
+                <p class="text-blue-100 mt-1">Pastikan semua data diisi dengan benar dan lengkap.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="nuptkForm" class="p-6 sm:p-8 space-y-8">
+
+                <!-- BAGIAN 1 -->
+                <section>
+                    <h3 class="section-title">Data Calon NUPTK</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="nama">Nama Lengkap (Sesuai KTP)</label>
+                            <input type="text" id="nama" required>
+                        </div>
+
+                        <div>
+                            <label for="ibu_kandung">Nama Ibu Kandung</label>
+                            <input type="text" id="ibu_kandung" required>
+                        </div>
+
+                        <div>
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input type="text" id="tempat_lahir" required>
+                        </div>
+
+                        <div>
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input type="date" id="tanggal_lahir" required>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                            <select id="jenis_kelamin" required>
+                                <option disabled selected>-- Pilih Jenis Kelamin --</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN 2 -->
+                <section>
+                    <h3 class="section-title">Upload Berkas Pendukung</h3>
+
+                    <div class="space-y-6">
+
+                        <div class="file-group">
+                            <label for="file_sk">SK Pengangkatan & SKBM 2 Tahun Terakhir</label>
+                            <span class="file-note">PDF • Maks 2MB</span>
+                            <input type="file" id="file_sk" name="file_sk" data-max-size="2097152" accept=".pdf" required>
+                        </div>
+
+                        <div class="file-group">
+                            <label for="file_sd">Ijazah SD</label>
+                            <span class="file-note">PDF • Maks 1MB</span>
+                            <input type="file" id="file_sd" name="file_sd" data-max-size="1048576" accept=".pdf" required>
+                        </div>
+
+                        <div class="file-group">
+                            <label for="file_smp">Ijazah SMP</label>
+                            <span class="file-note">PDF • Maks 1MB</span>
+                            <input type="file" id="file_smp" name="file_smp" data-max-size="1048576" accept=".pdf" required>
+                        </div>
+
+                        <div class="file-group">
+                            <label for="file_sma">Ijazah SMA</label>
+                            <span class="file-note">PDF • Maks 1MB</span>
+                            <input type="file" id="file_sma" name="file_sma" data-max-size="1048576" accept=".pdf" required>
+                        </div>
+
+                        <div class="file-group">
+                            <label for="file_s1">Ijazah S1/D4</label>
+                            <span class="file-note">PDF • Maks 1MB</span>
+                            <input type="file" id="file_s1" name="file_s1" data-max-size="1048576" accept=".pdf" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Submit -->
+                <div class="border-t pt-6 flex justify-end">
+                    <button type="submit" id="submitButton" class="submit-btn">
+                        <div class="spinner hidden" id="btnSpinner"></div>
+                        <span>Ajukan Data</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 mb-6 text-center text-gray-500 text-sm">
+        <p>&copy; 2025</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="messageOverlay" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h4 id="messageTitle"></h4>
+            <p id="messageText"></p>
+            <button id="messageClose" class="modal-close">Tutup</button>
+        </div>
+    </div>
+
+    <!-- APP JS -->
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>
